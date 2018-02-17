@@ -4,6 +4,12 @@ function toggleFeatureClass(cssClass) {
   });
 }
 
+function enableFeatureClass(cssClass) {
+  chrome.tabs.executeScript(null, {
+    "code": "document.getElementsByTagName('html')[0].classList.add('" + cssClass + "');"
+  });
+}
+
 chrome.tabs.onUpdated.addListener(function(_, _, tab) {
   if (tab.url.match(/forums\.somethingawful\.com/)) {
     chrome.pageAction.show(tab.id);
@@ -15,7 +21,7 @@ chrome.tabs.onUpdated.addListener(function(_, _, tab) {
 
       for (var cssClass in state) {
         if (state[cssClass]) {
-          toggleFeatureClass(cssClass);
+          enableFeatureClass(cssClass);
         }
       }
     });

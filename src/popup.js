@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       var cssClass = features[name];
       checkbox.setAttribute("type", "checkbox");
+      checkbox.setAttribute("data-cssclass", cssClass);
       checkbox.checked = (state[cssClass] === true);
-      checkbox.addEventListener("change", function() {
-        chrome.runtime.sendMessage({"cssClass": features[name]});
+      checkbox.addEventListener("change", function(e) {
+        var targetCSSClass = e.target.getAttribute("data-cssclass");
+        chrome.runtime.sendMessage({"cssClass": targetCSSClass});
 
-        state[cssClass] = checkbox.checked;
+        state[targetCSSClass] = e.target.checked;
         chrome.storage.sync.set(state);
       });
 
