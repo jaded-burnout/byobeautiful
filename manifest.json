@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "BYOBeautiful",
+  "version": "0.1",
+  "permissions": [
+    "https://forums.somethingawful.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://forums.somethingawful.com/*"],
+      "css": ["src/more-byob.css"]
+    }
+  ],
+  "page_action": {
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": false
+  }
+}
