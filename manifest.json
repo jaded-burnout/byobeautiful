@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "BYOBeautiful",
-  "version": "0.1",
+  "version": "0.2.0",
   "permissions": [
     "https://forums.somethingawful.com/",
     "storage",
