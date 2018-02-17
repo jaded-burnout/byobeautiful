@@ -1,13 +1,27 @@
-loaded = false;
+function toggleFeatureClass(cssClass) {
+  chrome.tabs.executeScript(null, {
+    "code": "document.getElementsByTagName('html')[0].classList.toggle('" + cssClass + "');"
+  });
+}
+
 chrome.tabs.onUpdated.addListener(function(_, _, tab) {
-  if (!loaded && tab.url.match(/forums\.somethingawful\.com/)) {
+  if (tab.url.match(/forums\.somethingawful\.com/)) {
     chrome.pageAction.show(tab.id);
-    loaded = true;
+    chrome.storage.sync.get(function(storedState) {
+      var state = {};
+      if (storedState) {
+        state = storedState;
+      }
+
+      for (var cssClass in state) {
+        if (state[cssClass]) {
+          toggleFeatureClass(cssClass);
+        }
+      }
+    });
   }
 });
 
-chrome.runtime.onMessage.addListener(function(request, sender, respond) {
-  chrome.tabs.executeScript(null, {
-    "code": "document.getElementsByTagName('html')[0].classList.toggle('" + request.cssClass + "');"
-  });
+chrome.runtime.onMessage.addListener(function(request) {
+  toggleFeatureClass(request.cssClass);
 });

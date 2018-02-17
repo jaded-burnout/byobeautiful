@@ -3,7 +3,8 @@
   "name": "BYOBeautiful",
   "version": "0.1",
   "permissions": [
-    "https://forums.somethingawful.com/"
+    "https://forums.somethingawful.com/",
+    "storage"
   ],
   "content_scripts": [
     {
