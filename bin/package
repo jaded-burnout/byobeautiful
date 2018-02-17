@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "json"
+
+manifest = JSON.parse(File.read(File.join(File.dirname(__FILE__), *%w[.. manifest.json])))
+version = manifest["version"]
+
+output_file = "byobeautiful-#{version}.zip"
+puts "Packaging #{output_file}"
+system("git archive -o #{output_file} HEAD")
