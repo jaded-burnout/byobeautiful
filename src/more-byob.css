@@ -9,9 +9,9 @@
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 /* Fully reveal the hammock cat */
-.show-cat .forum_268 body {
+.show-cat body.forum_268 {
   background-position-y: 60px;
 }
-.show-cat .forum_268 .showthread div#content {
+.show-cat .forum_268 div#content {
   margin-top: 125px !important;
 }
