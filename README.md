@@ -1,6 +1,6 @@
 # BYOBeautiful
 
-A Chrome plugin for the most chill forum.
+A Chrome extension / Firefox addon for the most chill forum.
 
 ## Usage
 
