@@ -10,9 +10,25 @@
     <h1>BYOBeautiful</h1>
 
     <form id="features">
+      <fieldset>
+        <label>
+          <input type="checkbox" id="spinning-images" />
+          Rotating images
+        </label>
+
+        <label>Spin time</label>
+        <input type="range" min="1" value="9000" max="9000" />
+      </fieldset>
+
+      <fieldset>
+        <label>
+          Reveal hammock cat
+          <input type="checkbox" id="show-cat" />
+        </label>
+      </fieldset>
     </form>
 
-    <script src="features.js" charset="utf-8"></script>
+    <script src="extras.js" charset="utf-8"></script>
     <script src="popup.js" charset="utf-8"></script>
   </body>
 </html>

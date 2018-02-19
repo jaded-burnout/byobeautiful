@@ -29,5 +29,17 @@ chrome.tabs.onUpdated.addListener(function(_, _, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function(request) {
-  toggleFeatureClass(request.cssClass);
+  if (request.action === "toggle") {
+    toggleFeatureClass(request.id);
+  } else if (request.id === "spinning-images") {
+    if (request.action === "set-spin-time") {
+      chrome.tabs.executeScript(null, {
+        "code":
+          "var images = document.querySelectorAll('.forum_268 img');" +
+          "for (var image of images) {" +
+            "image.style.animationDuration = '" + request.value + "s';" +
+          "}"
+      });
+    }
+  }
 });

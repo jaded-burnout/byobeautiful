@@ -7,27 +7,25 @@ document.addEventListener('DOMContentLoaded', function() {
       state = storedState;
     }
 
-    for (var name in features) {
-      var label = document.createElement("label");
-      var checkbox = document.createElement("input");
-      var labelText = document.createTextNode(name);
+    var form = document.getElementById("features");
+    var checkboxes = form.querySelectorAll("input[type=checkbox]");
+    for (var checkbox of checkboxes) {
+      var featureId = checkbox.getAttribute("id");
 
-      var cssClass = features[name];
-      checkbox.setAttribute("type", "checkbox");
-      checkbox.setAttribute("data-cssclass", cssClass);
-      checkbox.checked = (state[cssClass] === true);
+      checkbox.checked = (state[featureId] === true);
       checkbox.addEventListener("change", function(e) {
-        var targetCSSClass = e.target.getAttribute("data-cssclass");
-        chrome.runtime.sendMessage({"cssClass": targetCSSClass});
+        chrome.runtime.sendMessage({
+          "id": "spinning-images",
+          "action": "toggle"
+        });
 
-        state[targetCSSClass] = e.target.checked;
+        state[featureId] = e.target.checked;
         chrome.storage.sync.set(state);
       });
 
-      label.appendChild(checkbox);
-      label.appendChild(labelText);
-
-      form.appendChild(label);
+      if (extras[featureId]) {
+        extras[featureId](checkbox);
+      }
     }
   });
 });
